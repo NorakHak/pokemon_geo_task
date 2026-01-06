@@ -1,0 +1,28 @@
+body {
+	background-color: rgba(255, 255, 255, 0.87);
+	color: #242424;
+	font-family: system-ui, sans-serif;
+	font-weight: 400;
+	margin: 0;
+	line-height: 1.5;
+}
+
+main {
+	display: grid;
+	min-height: 100svh;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto 1fr;
+}
+
+header {
+	border-color: currentColor;
+	border-bottom: solid 1px;
+	grid-column: 1 / -1;
+	padding-inline-start: 1rem;
+}
+
+h1 {
+	margin: 0;
+}
+
+/* TODO: Style your components */
