@@ -1,80 +1,149 @@
 # Pokemon Geo Task
 
-## Time Limit
+> An interactive map application displaying Pokemon stops using ArcGIS JavaScript SDK and React, with real-time Pokemon data from the PokeAPI.
 
-**4 hours maximum**. We value your time. If you're stuck for an hour on one part, move on and note it in attached letter.
+![React]
+![TypeScript]
+![ArcGIS]
+![Vite]
 
-## Context
+## Overview
 
-You're building app for Pokemon discovery in Yerevan. The data is in `public/pokestops.json`, each point has a `pokemonId` linking to the Pokemon API.
+This project displays Pokemon stops on an interactive map, allowing users to explore Pokestops, view Pokemon information, and filter by type. Built with React and TypeScript, it leverages the ArcGIS JavaScript SDK for mapping capabilities.
 
-The app is scaffolded with `vite` and `typescript` and uses `ArcGIS APIs` for mapping. These core technologies must remain in place, everything else can be modified as you see fit.
+## Features
 
-## How to Start
+### Interactive Map
+- **Custom Pokeball Icons**: All Pokestops rendered with custom Pokeball SVG icons
+- **Point Clustering**: Nearby stops are automatically clustered for better readability and performance
+- **Smooth Navigation**: Smooth zoom transitions when navigating to specific locations
 
-You need an LTS version of Node.js (^24) and a package manager.
+### Pokemon Data Integration
+- **Real-time Fetching**: Fetches Pokemon data from the PokeAPI for each stop
+- **Rich Information**: Displays Pokemon name, types, and sprite image
+- **Smart Caching**: Efficient data handling with local cache to minimize API calls
 
-Run these commands with your preferred package manager:
+### Sidebar Pokedex
+- **Complete List**: View all Pokestops in a scrollable sidebar
+- **Quick Navigation**: One-click zoom to any Pokestop location
+- **Detailed Info**: See Pokemon name, types, and coordinates
 
-```bash
-# for npm
-npm install
-npm run dev
+### Type Filtering
+- **Dynamic Filtering**: Filter Pokestops by Pokemon type
+- **Real-time Updates**: Map and sidebar update instantly when filter changes
 
-# for pnpm
-pnpm install
-pnpm dev
-```
+### Loading States
+- **Smooth UX**: Loading overlay during data fetching
 
-## What to Implement
+## Tech Stack
 
-### Core Requirements
+| Category | Technology |
+|----------|-----------|
+| **Framework** | React 18+ |
+| **Language** | TypeScript 5+ |
+| **Build Tool** | Vite 5+ |
+| **Mapping** | ArcGIS JavaScript SDK |
+| **Styling** | Plain CSS |
+| **API** | [PokeAPI](https://pokeapi.co/) |
 
-1. **Display the map** with all pokestops rendered as points (use `public/pokeball.svg` for an icon);
-1. **Fetch Pokemon data** for each stop ([PokeAPI](https://pokeapi.co/): `GET /api/v2/pokemon/{id}`);
-1. **Show a popup** when clicking a point: show Pokemon name, types, and sprite image;
-1. **Render a sidebar list** of all stops with Pokemon names and coordinates;
-1. **Create a button** to each sidebar card that zooms to its point on the map.
+### ArcGIS SDK Features Used
 
-### Bonus (if time permits)
+- `Map` and `MapView` - Core mapping functionality
+- `FeatureLayer` - Rendering Pokestop points
+- `View.goTo()` - Smooth zoom animations
+- `featureReduction: { type: "cluster" }` - Point clustering
 
-- **Nearby filter**: Add a toggle/button to show only stops within 2km of map center
-- **Type Filter**: Filter list by Pokemon type
-- **UX polish**: Loading states, error handling, etc.
+## Getting Started
 
-## Technical Guidelines
+### Prerequisites
 
-- Use TypeScript;
-- Keep code clear and maintainable;
-- You may use any frontend framework of your choice (React, Vue, Svelte) or stick with vanilla;
-- Use any styling solution, plain CSS is fine as well;
-- For ArcGIS JS SDK, consult with the [docs](https://developers.arcgis.com/javascript/latest/api-reference/). We've kept the API surface small. Useful doc references:
-  - [GeoJSONLayer](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-GeoJSONLayer.html)
-  - [Styles](https://developers.arcgis.com/javascript/latest/visualization/)
-  - [Popup Widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Popup.html)
-  - [View GoTo](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-View2D.html#goTo)
+- Node.js 18+ and npm (or pnpm/yarn)
 
-## What to Submit
+### Installation
 
-Send us an email with a link to your public Github repository, alongside with a short note on:
+1. **Clone the repository**
+   ```bash
+   git clone <repo-url>
+   cd pokemon_geo_task
+   ```
 
-- What you completed
-- Rough time spent
-- Write on:
-	- Decisions you made;
-	- Framework choice and tradeoffs;
-	- How you handled loading/error states;
-	- One UX improvement they’d make with more time.
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   pnpm install
+   ```
 
-## Evaluation Criteria
+3. **Run the development server**
+   ```bash
+   npm run dev
+   # or
+   pnpm dev
+   ```
 
-Some criteria upon which your work will be evaluated:
+4. **Open your browser**
+   Navigate to `http://localhost:5173` (or the port shown in your terminal)
 
-- **Functionality**: Does it work? Are edge cases handled?
-- **Code Quality**: Type safety, clarity, structure;
-- **Product Thinking**: UX decisions, error handling, performance awareness;
-- **Communication**: commit messages, attached note.
+## Key Features Explained
 
----
+### Data Handling & Performance
 
-**Good Luck!**
+- **Unique ID Fetching**: Only fetches unique Pokemon IDs to reduce redundant API calls
+- **Local Cache**: Uses `Map<number, PokemonData>` for efficient data storage
+- **State Synchronization**: React state keeps sidebar and map layer in sync
+
+### Map Clustering
+
+Nearby Pokestops are automatically clustered when zoomed out, improving:
+- **Performance**: Fewer rendered elements
+- **Readability**: Cleaner map view
+- **User Experience**: Easier navigation
+
+### Type Filtering
+
+The filter dropdown dynamically:
+- Extracts all unique Pokemon types from loaded data
+- Updates both map and sidebar in real-time
+- Maintains smooth performance with React `useMemo`
+
+## Limitations
+
+### Popup Widget
+
+Despite significant efforts, popups for each Pokestop could not be implemented within.
+
+- The ArcGIS `FeatureLayer` approach works well for rendering icons
+- Integrating popup functionality with `GeoJSONLayer` proved challenging
+- This remains a known limitation and potential future enhancement
+
+## Future Improvements
+
+With additional development time, the following enhancements would improve the user experience:
+
+- **Fully Functional Popups**: Detailed Pokemon information on click
+- **Nearby Filter**: Show only stops within 2km of current map center
+- **Custom Basemaps**: Additional map styling options
+- **Hover Effects**: Interactive hover states for map points
+- **Smoother Transitions**: Enhanced animation effects
+- **Mobile Optimization**: Better responsive design
+- **Search Functionality**: Search Pokestops by name or Pokemon
+
+## Development Notes
+
+### Development Time
+
+**Total**: ~8 hours
+
+**Time Breakdown**:
+- Understanding ArcGIS SDK: ~3 hours
+- Synchronizing map/sidebar data: ~2 hours
+- API integration & caching: ~1.5 hours
+- UI/UX implementation: ~1.5 hours
+
+### Framework Choice
+
+Originally intended to use **Svelte**, but **React** was chosen for:
+- Faster prototyping
+- Familiarity
+
+**Built with ❤️ using React, TypeScript, and ArcGIS JavaScript SDK**
