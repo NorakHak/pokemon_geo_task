@@ -2,11 +2,6 @@
 
 > An interactive map application displaying Pokemon stops using ArcGIS JavaScript SDK and React, with real-time Pokemon data from the PokeAPI.
 
-![React]
-![TypeScript]
-![ArcGIS]
-![Vite]
-
 ## Overview
 
 This project displays Pokemon stops on an interactive map, allowing users to explore Pokestops, view Pokemon information, and filter by type. Built with React and TypeScript, it leverages the ArcGIS JavaScript SDK for mapping capabilities.
@@ -63,7 +58,7 @@ This project displays Pokemon stops on an interactive map, allowing users to exp
 
 1. **Clone the repository**
    ```bash
-   git clone <repo-url>
+   git clone <https://github.com/NorakHak/pokemon_geo_task>
    cd pokemon_geo_task
    ```
 
